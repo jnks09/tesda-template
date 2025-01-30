@@ -28,9 +28,9 @@
                     let subtotal = parseInt(product.price * product.quantity);
                     overall_total += subtotal;
 %>
-                    <tr>
+                    <tr class="text-capitalize">
                         <td class=""><%= product.name %></td>
-                        <td class="">$<%= product.price %></td>
+                        <td class="">₱<%= product.price %></td>
                         <td class="d-flex justify-content-center">
                             <form class="update_quantity_form" action="/carts/update-quantity" method="post" class="">
                                 <button type="button" class="decrement-button">-</button>
@@ -43,14 +43,24 @@
                                 <button class="delete-button">Delete</button>
                             </form>
                         </td>
-                        <td class="">$<%= subtotal %></td>
+                        <td class="">₱<%= subtotal %></td>
                     </tr>
 <% 				    }); %>
                     <tr>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>$<%= overall_total %></td>
+                        <td>₱<%= overall_total %></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <form id="checkout_form" action="/checkout" method="post">
+                                <button class="btn btn-dark" id="checkout_button">Checkout</button>
+                            </form>
+                        </td>
                     </tr>
                 </tbody>
             </table>

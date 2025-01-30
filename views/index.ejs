@@ -19,8 +19,8 @@
 					<form action="/add-to-cart" method="post" class="checkout_form text-capitalize col-3 mb-2">
 						<p class="text-truncate"><%= product.name %></p>
 						<img class="product_image img-fluid" src="/images/<%= product.image_path %>" alt="" style="height: 200px;" data-bs-toggle="modal" data-bs-target="#show-image-modal">
-						<p class="text-truncate"><%= product.description %></p>
-						<p>$<%= product.price %></p>
+						<p class="overflow-y-hidden" style="height: 50px;"><%= product.description %></p>
+						<p>₱<%= product.price %></p>
 						<div class="d-flex justify-content-between">
 							<button type="button" class="btn btn-outline-dark decrement-button">-</button>
 							<input name="quantity" class="quantity w-100 text-center" type="number" value="1" readonly>

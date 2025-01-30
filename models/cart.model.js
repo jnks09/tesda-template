@@ -25,6 +25,10 @@ class CartModel extends DatabaseModel{
     deleteCartProduct = async (id) => {
         return await this.executeQuery(format("DELETE FROM user_cart_products WHERE id = ?;", [id]));
     }
+
+    clearCartProduct = async (user_id) => {
+        return await this.executeQuery(format("DELETE FROM user_cart_products WHERE user_id = ?;", [user_id]));
+    }
 }
 
 export default CartModel;

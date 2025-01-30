@@ -28,4 +28,16 @@ $(document).ready(function() {
 
             return false;
         })
+        .on("click", "#checkout_form", function(){
+            const checkout_form = $(this);
+
+            $.post(checkout_form.attr("action"), checkout_form.serialize(), function(data){
+                if(data.status){
+                    alert("Your products have been checked out.");
+                    window.location.reload();
+                }
+            });
+
+            return false;
+        })
 });

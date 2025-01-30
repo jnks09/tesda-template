@@ -20,6 +20,12 @@ class CartController {
         
         res.json({ status: !!delete_cart_products.affectedRows })
     }
+    
+    checkout = async (req, res) => {
+        const clear_cart_products = await new CartModel().clearCartProduct(req.session.user.id);
+        
+        res.json({ status: !!clear_cart_products.affectedRows })
+    }
 }
 
 export default new CartController;
