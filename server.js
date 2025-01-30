@@ -24,6 +24,10 @@ app.set("view engine", "ejs");
 app.set("views", path.resolve("views"));
 
 /* Routes */
+app.use((req, res, next) => {
+    req.session.user = { id: 1 };
+    next();
+})
 app.use("/", routes);
 
 /* Server */

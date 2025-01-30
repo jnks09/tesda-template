@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Carts</title>
+		<link rel="stylesheet" href="/vendors/css/bootstrap.css">
+		<script src="/vendors/js/jquery.js"></script>
+		<script src="/vendors/js/bootstrap.bundle.min.js"></script>
+		<script src="/customs/js/cart.js"></script>
+</head>
+<body>
+		<%- include("partials/header") %>
+		<h1 class="text-black text-center my-4">Carts</h1>
+
+		<div id="cart_container" class="container text-center">
+			<table class="table">
+                <thead>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </thead>
+                <tbody>
+<% 				    
+                    let overall_total = 0;
+                    products.forEach(product => { 
+                    let subtotal = parseInt(product.price * product.quantity);
+                    overall_total += subtotal;
+%>
+                    <tr>
+                        <td class=""><%= product.name %></td>
+                        <td class="">$<%= product.price %></td>
+                        <td class="d-flex justify-content-center">
+                            <form class="update_quantity_form" action="/carts/update-quantity" method="post" class="">
+                                <button type="button" class="decrement-button">-</button>
+                                <input type="number" class="quantity text-center" name="quantity" value="<%= product.quantity %>" readonly>
+                                <button type="button" class="increment-button">+</button>
+                                <input type="hidden" name="cart_id" value="<%= product.cart_id %>">
+                            </form>
+                            <form class="delete_cart_product_form" action="/carts/delete">
+                                <input type="hidden" name="cart_id" value="<%= product.cart_id %>">
+                                <button class="delete-button">Delete</button>
+                            </form>
+                        </td>
+                        <td class="">$<%= subtotal %></td>
+                    </tr>
+<% 				    }); %>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>$<%= overall_total %></td>
+                    </tr>
+                </tbody>
+            </table>
+		</div>
+
+		<div class="modal fade" id="show-image-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modal-title"></h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body container">
+						<img class="w-100" id="modal-image" src="" alt="" style="height: 300px; object-fit: cover;">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>
